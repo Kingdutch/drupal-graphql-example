@@ -19,7 +19,8 @@
     "require": {
         "composer/installers": "^2.2",
         "drupal/core-composer-scaffold": "^9.4",
-        "drupal/core-recommended": "^9.4"
+        "drupal/core-recommended": "^9.4",
+        "drupal/graphql": "^4.3"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
