@@ -1,0 +1,63 @@
+# Keep our folders containing custom code.
+!/html/modules/custom
+!/html/profiles/custom
+!/html/themes/custom
+
+# Ignore external packages
+vendor/
+
+# Ignore scaffold files and external Drupal packages
+.editorconfig
+.gitattributes
+
+/config/sync
+files_private
+html/.csslintrc
+html/.eslintignore
+html/.eslintrc.json
+html/.ht.router.php
+html/.htaccess
+html/INSTALL.txt
+html/README.md
+html/autoload.php
+html/core/
+html/example.gitignore
+html/index.php
+html/libraries
+html/modules/README.txt
+html/modules/contrib/
+html/profiles/README.txt
+html/profiles/contrib/
+html/robots.txt
+html/sites/README.txt
+html/sites/default/default.services.yml
+html/sites/default/default.settings.php
+html/sites/development.services.yml
+html/sites/example.settings.local.php
+html/sites/example.sites.php
+html/sites/simpletest
+html/sites/default/files
+html/sites/default/settings.local.php
+html/sites/default/settings.php
+html/themes/README.txt
+html/themes/contrib/
+html/update.php
+html/web.config
+html/simplesaml
+
+# Developer files #
+###################
+docker-compose.override.yml
+.env
+
+## Directory-based project format:
+.DS_Store
+.idea
+
+## Platform.sh local files
+.platform/local
+
+# Drupal libraries
+html/libraries
+/.editorconfig
+/.gitattributes

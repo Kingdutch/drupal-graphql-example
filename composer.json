@@ -1,0 +1,63 @@
+{
+    "name": "kingdutch/drupalcon-graphql-demo",
+    "description": "An example project that demoes the GraphQL module.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "8.0.20"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "composer/installers": "^2.2",
+        "drupal/core-composer-scaffold": "^9.4",
+        "drupal/core-recommended": "^9.4"
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "drush/drush": "^11.1",
+        "phpunit/phpunit": "^8"
+    },
+    "repositories": [
+        { "type": "composer", "url": "https://packages.drupal.org/8" }
+    ],
+    "extra": {
+        "installer-paths": {
+            "html/core": [
+                "drupal/core"
+            ],
+            "html/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "html/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "html/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "html/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "enable-patching": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "html/"
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+# See: https://docs.docker.com/compose/compose-file/
+# See: https://github.com/compose-spec/compose-spec/blob/master/spec.md
+services:
+  web:
+    image: goalgorilla/open_social_docker:dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www:delegated
+    depends_on:
+      - db
+      - mailcatcher
+    environment:
+      DRUPAL_SETTINGS: development
+      VIRTUAL_HOST: "${PROJECT_BASE_URL}"
+      VIRTUAL_PORT: 80
+    ports:
+      - "80"
+    container_name: "${PROJECT_NAME}_web"
+
+  db:
+    image: mariadb:10.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: drupalcon
+    volumes:
+      - db_data:/var/lib/mysql
+    container_name: "${PROJECT_NAME}_db"
+    command: mysqld --max_allowed_packet=16M
+    ports:
+      - "3306"
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    environment:
+      VIRTUAL_HOST: "mailcatcher.${PROJECT_BASE_URL}"
+      VIRTUAL_PORT: 1080
+    ports:
+      - "1080"
+    container_name: "${PROJECT_NAME}_mailcatcher"
+
+volumes:
+  db_data:
+
+networks:
+  # Default will connect all containers to the specified network.
+  default:
+    # Network name.
+    name: nginx
+    # Connects to an existing network.
+    external: true
