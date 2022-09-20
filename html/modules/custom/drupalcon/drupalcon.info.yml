@@ -1,0 +1,7 @@
+name: 'Drupalcon'
+description: 'A module that shows off how to use GraphQL at Drupalcon.'
+type: module
+core_version_requirement: ^9
+package: GraphQL
+dependencies:
+  - drupal:graphql
