@@ -1,0 +1,132 @@
+################################################################################
+# This file has originally been created for Open Social and has been shared as #
+# part of the DrupalCon EU talk "Building a GraphQL API - Beyond the Basics"   #
+# under the GPLv2 license.                                                     #
+#                                                                              #
+# Find the original code in https://github.com/goalgorilla/open_social/        #
+################################################################################
+
+# Our schema indicates which operations we support. It only has three possible
+# keys: query, mutation, and subscription. They each point to a GraphQL object
+# type that will have their fields. We've named the types after the root
+# operation but that's not a requirement, just a convention.
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+"""
+The schema's entry-point for queries. This acts as the public, top-level API
+from which all queries must start.
+"""
+# Public documentation is provided using """, comments prefixed with # will only
+# be available in this file and will not be public.
+type Query
+
+"""
+The base mutation type.
+"""
+# The type used for our mutation operation, we will add fields to this in schema
+# extensions.
+type Mutation
+
+"""
+The schema's entry-point for subscriptions. This acts as the public, top-level
+API from which all subscriptions must start.
+"""
+# The type used for our subscription operation, we will add fields to this in
+# schema extensions. The Drupal GraphQL module does not support subscriptions
+# itself, but it allows specifying subscriptions that may be served by an
+# external server. You would need a router to handle the Websocket connections
+# to separate query/mutation traffic from subscription traffic.
+type Subscription
+
+"""
+A date and time.
+"""
+# We could return a timestmap directly. However, already wrapping this in a type
+# now will let us provide different datetime representations in the future if we
+# so desire.
+type DateTime {
+  """
+  The date and time as UNIX timestamp.
+  """
+  timestamp: Timestamp!
+}
+
+"""
+A concrete fetchable type that is addressable by an id.
+"""
+# This interface is a convention originally started by the Relay client to make
+# refetching of data easy.
+interface Node {
+  # The ID type is provided by the GraphQL specification. Its contents is up to
+  # the server but it's meant to be opaque for clients so they shouldn't care
+  # about the actual format of an ID.
+  id: ID!
+}
+
+"""
+A cursor for use in pagination.
+"""
+scalar Cursor
+
+"""
+A paginated set of results.
+"""
+interface Connection {
+  """
+  The edges of this connection.
+  """
+  edges: [Edge!]!
+  """
+  The nodes of the edges of this connection.
+
+  Provides direct access to the nodes in case other edge information
+  isn't needed.
+  """
+  nodes: [Node!]!
+  """
+  Information to aid in pagination
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in a connection.
+
+Provides the cursor to fetch data based on the position of the associated node.
+Specific edge implementations may provide more information about the
+relationship they represent.
+"""
+interface Edge {
+  cursor: Cursor!
+  node: Node!
+}
+
+# PageInfo deviates from the current Relay spec as in the spec the
+# start-/endCursor fields may not be null. However, this is impractical because
+# it does not account for empty results.
+# See: https://github.com/facebook/relay/pull/2655
+"""
+Information about the page in a connection.
+"""
+type PageInfo {
+  """
+  Whether there are more pages in this connection.
+  """
+  hasNextPage: Boolean!
+  """
+  Whether there  are previous pages in this connection.
+  """
+  hasPreviousPage: Boolean!
+  """
+  The cursor for the first element in this page
+  """
+  startCursor: Cursor
+  """
+  The cursor for the last element in this page
+  """
+  endCursor: Cursor
+}
