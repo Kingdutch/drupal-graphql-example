@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: {  }
+name: drupalcon_graphql
+label: 'DrupalCon GraphQL'
+endpoint: /graphql
+debug_flag: 15
+schema: drupalcon
+caching: true
+batching: false
+disable_introspection: false
+query_depth: null
+query_complexity: null
+schema_configuration: {  }
+persisted_queries_settings: {  }
