@@ -1,0 +1,8 @@
+name: 'Drupalcon User'
+description: 'Provides user functionality extension for our DrupalCon GraphQL schema.'
+type: module
+core_version_requirement: ^9
+package: GraphQL
+dependencies:
+  - drupalcon:drupalcon
+  - drupalcon_chat:drupalcon_chat
